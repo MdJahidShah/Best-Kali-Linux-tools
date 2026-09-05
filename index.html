@@ -1,1 +1,919 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="UTxFHuoUYF8hWnwcz9oTUnR67fvD3Xpyu_o_zoDhXNQ" />
+    <title>Best Kali Linux Tools | Cybersecurity Lab</title>
 
+    <meta name="description"
+          content="A curated collection of the best Kali Linux tools with installation guides, usage information, features, and cybersecurity learning resources.">
+
+    <meta name="keywords"
+          content="Kali Linux tools, cybersecurity tools, penetration testing, ethical hacking, Nmap, Wireshark, Hydra, Metasploit, John the Ripper">
+
+    <meta name="author" content="Md. Jahid Shah">
+
+    <!-- Bootstrap -->
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Font Awesome -->
+    <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+        rel="stylesheet"
+    >
+
+    <!-- Project stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <script type="application/ld+json">
+    	{
+    	  "@context": "https://schema.org",
+    	  "@graph": [
+    
+    		{
+    		  "@type": "WebSite",
+    		  "@id": "https://labs.jahidshah.com/#website",
+    		  "url": "https://labs.jahidshah.com/",
+    		  "name": "Jahid Shah Labs",
+    		  "description": "Interactive demos, WordPress themes, plugins, and open-source security utilities created by Jahid Shah.",
+    		  "publisher": {
+    			"@id": "https://jahidshah.com/#person"
+    		  }
+    		},
+    
+    		{
+    		  "@type": "Person",
+    		  "@id": "https://jahidshah.com/#person",
+    		  "name": "Jahid Shah",
+    		  "url": "https://jahidshah.com/",
+    		  "image": "https://labs.jahidshah.com/Images/Md_Jahid_Shah.png",
+    		  "jobTitle": "WordPress Developer & Security Specialist",
+    		  "worksFor": {
+    			"@type": "Organization",
+    			"name": "JS Security & Development",
+    			"url": "https://jahidshah.com/"
+    		  },
+    		  "sameAs": [
+    			"https://profiles.wordpress.org/jahidshah/",
+    			"https://github.com/MdJahidShah",
+    			"https://www.linkedin.com/in/jahidshah/",
+    			"https://x.com/JahidShahwp",
+    			"https://www.facebook.com/jahidwpsec/",
+    			"https://www.instagram.com/jahidshahwp/",
+    			"https://www.youtube.com/@JahidShahWP",
+    			"https://www.pinterest.com/jahidshahwp/",
+    			"https://businessbridgehub.com/"
+    		  ]
+    		},
+    
+    		{
+    		  "@type": "CollectionPage",
+    		  "@id": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/#webpage",
+    		  "url": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/",
+    		  "name": "Best Kali Linux Tools",
+    		  "headline": "Best Kali Linux Tools",
+    		  "description": "A curated collection of Kali Linux tools for cybersecurity, penetration testing, vulnerability assessment, network analysis, digital forensics, and security learning.",
+          "datePublished": "2026-09-05",
+          "dateModified": "2026-09-05",
+          "isPartOf": {
+    			"@id": "https://labs.jahidshah.com/#website"
+    		  },
+    		  "about": [
+    			{
+    			  "@type": "Thing",
+    			  "name": "Kali Linux"
+    			},
+    			{
+    			  "@type": "Thing",
+    			  "name": "Cybersecurity"
+    			},
+    			{
+    			  "@type": "Thing",
+    			  "name": "Penetration Testing"
+    			},
+    			{
+    			  "@type": "Thing",
+    			  "name": "Ethical Hacking"
+    			}
+    		  ],
+    		  "publisher": {
+    			"@id": "https://jahidshah.com/#person"
+    		  },
+    		  "author": {
+    			"@id": "https://jahidshah.com/#person"
+    		  },
+    		  "image": {
+    			"@type": "ImageObject",
+    			"@id": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/#image",
+    			"url": "https://labs.jahidshah.com/Images/Md_Jahid_Shah.png",
+    			"contentUrl": "https://labs.jahidshah.com/Images/Md_Jahid_Shah.png",
+    			"caption": "Jahid Shah"
+    		  },
+    		  "mainEntity": {
+    			"@id": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/#tool-list"
+    		  }
+    		},
+    
+    		{
+    		  "@type": "ItemList",
+    		  "@id": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/#tool-list",
+    		  "name": "Best Kali Linux Tools",
+    		  "description": "Featured Kali Linux and cybersecurity tools documented in the collection.",
+    		  "numberOfItems": 1,
+    		  "itemListOrder": "https://schema.org/ItemListOrderAscending",
+    		  "itemListElement": [
+    
+    			{
+    			  "@type": "ListItem",
+    			  "position": 1,
+    			  "name": "THC Hydra",
+    			  "url": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/tools/hydra/"
+    			}
+    
+    		  ]
+    		},
+    
+    		{
+    		  "@type": "BreadcrumbList",
+    		  "@id": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/#breadcrumb",
+    		  "itemListElement": [
+    			{
+    			  "@type": "ListItem",
+    			  "position": 1,
+    			  "name": "Jahid Shah Labs",
+    			  "item": "https://labs.jahidshah.com/"
+    			},
+    			{
+    			  "@type": "ListItem",
+    			  "position": 2,
+    			  "name": "Best Kali Linux Tools",
+    			  "item": "https://labs.jahidshah.com/Best-Kali-Linux-Tools/"
+    			}
+    		  ]
+    		}
+    
+    	  ]
+    	}
+    	</script>
+    </head>
+
+<body>
+
+<!-- NAVBAR -->
+<div id="navbar"></div>
+
+<!-- HERO -->
+<header class="hero">
+    <div class="hero-grid"></div>
+
+    <div class="container hero-content text-center">
+
+        <div class="badge-lab">
+            <i class="fa-solid fa-terminal"></i>
+            Cybersecurity Learning Resource
+        </div>
+
+        <h1>
+            Best <span>Kali Linux</span><br>
+            Tools
+        </h1>
+
+        <p class="hero-text">
+            A curated collection of Kali Linux tools for cybersecurity,
+            penetration testing, vulnerability assessment, network analysis,
+            digital forensics, and security learning.
+        </p>
+
+        <div class="d-flex justify-content-center flex-wrap gap-3">
+
+            <a
+                href="#tools"
+                class="btn btn-primary-custom"
+            >
+                <i class="fa-solid fa-toolbox me-2"></i>
+                Explore Tools
+            </a>
+
+            <a
+                href="https://github.com/MdJahidShah/Best-Kali-Linux-tools"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="btn btn-outline-custom"
+            >
+                <i class="fa-brands fa-github me-2"></i>
+                GitHub Repository
+            </a>
+
+        </div>
+
+    </div>
+</header>
+
+
+<!-- ABOUT -->
+<section class="section">
+
+    <div class="container">
+
+        <div class="row g-4">
+
+            <div class="col-lg-4">
+                <div class="info-box h-100">
+
+                    <i class="fa-solid fa-book-open"></i>
+
+                    <h3>Learn</h3>
+
+                    <p>
+                        Understand what each security tool does,
+                        where it is useful, and how security professionals
+                        use it during authorized assessments.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="info-box h-100">
+
+                    <i class="fa-solid fa-download"></i>
+
+                    <h3>Install</h3>
+
+                    <p>
+                        Find installation instructions and setup
+                        information for Kali Linux and other supported
+                        environments.
+                    </p>
+
+                </div>
+            </div>
+
+            <div class="col-lg-4">
+                <div class="info-box h-100">
+
+                    <i class="fa-solid fa-shield-halved"></i>
+
+                    <h3>Practice Safely</h3>
+
+                    <p>
+                        Use these tools only on systems, networks,
+                        applications, and environments where you have
+                        explicit authorization to test.
+                    </p>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CATEGORIES -->
+<section class="section pt-0" id="categories">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Browse by Category
+        </h2>
+
+        <p class="section-subtitle">
+            Explore security tools based on their primary cybersecurity
+            function.
+        </p>
+
+        <div class="row g-4">
+
+            <!-- Reconnaissance -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="category-card">
+
+                    <div class="category-icon">
+                        <i class="fa-solid fa-radar"></i>
+                    </div>
+
+                    <h3>Reconnaissance</h3>
+
+                    <p>
+                        Tools for network discovery, information gathering,
+                        enumeration, and attack-surface analysis.
+                    </p>
+
+                    <a
+                        href="categories/reconnaissance.html"
+                        class="category-link"
+                    >
+                        Explore category
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Network -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="category-card">
+
+                    <div class="category-icon">
+                        <i class="fa-solid fa-network-wired"></i>
+                    </div>
+
+                    <h3>Network Analysis</h3>
+
+                    <p>
+                        Analyze network traffic, protocols, connections,
+                        packets, and network behavior.
+                    </p>
+
+                    <a
+                        href="categories/network-analysis.html"
+                        class="category-link"
+                    >
+                        Explore category
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Vulnerability -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="category-card">
+
+                    <div class="category-icon">
+                        <i class="fa-solid fa-bug"></i>
+                    </div>
+
+                    <h3>Vulnerability Scanning</h3>
+
+                    <p>
+                        Identify potential vulnerabilities and weaknesses
+                        during authorized security assessments.
+                    </p>
+
+                    <a
+                        href="categories/vulnerability-scanning.html"
+                        class="category-link"
+                    >
+                        Explore category
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Password -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="category-card">
+
+                    <div class="category-icon">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+
+                    <h3>Password Auditing</h3>
+
+                    <p>
+                        Tools for password-strength auditing, credential
+                        analysis, and authorized authentication testing.
+                    </p>
+
+                    <a
+                        href="categories/password-auditing.html"
+                        class="category-link"
+                    >
+                        Explore category
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Web -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="category-card">
+
+                    <div class="category-icon">
+                        <i class="fa-solid fa-globe"></i>
+                    </div>
+
+                    <h3>Web Security</h3>
+
+                    <p>
+                        Tools used for web application security testing,
+                        analysis, enumeration, and vulnerability research.
+                    </p>
+
+                    <a
+                        href="categories/web-security.html"
+                        class="category-link"
+                    >
+                        Explore category
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Forensics -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="category-card">
+
+                    <div class="category-icon">
+                        <i class="fa-solid fa-magnifying-glass-chart"></i>
+                    </div>
+
+                    <h3>Digital Forensics</h3>
+
+                    <p>
+                        Tools for investigation, evidence analysis,
+                        file analysis, and digital forensic workflows.
+                    </p>
+
+                    <a
+                        href="categories/forensics.html"
+                        class="category-link"
+                    >
+                        Explore category
+                        <i class="fa-solid fa-arrow-right ms-1"></i>
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FEATURED TOOLS -->
+<section class="section pt-0" id="tools">
+
+    <div class="container">
+
+        <h2 class="section-title">
+            Featured Kali Linux Tools
+        </h2>
+
+        <p class="section-subtitle">
+            Start with some of the most commonly used tools in
+            cybersecurity and penetration-testing workflows.
+        </p>
+
+
+        <div class="row g-4">
+
+            <!-- NMAP -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-crosshairs"></i>
+                    </div>
+
+                    <h3>Nmap</h3>
+
+                    <p>
+                        Network discovery and security auditing tool
+                        used to identify hosts, services, ports, and
+                        network configurations.
+                    </p>
+
+                    <a
+                        href="tools/nmap/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- WIRESHARK -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-wave-square"></i>
+                    </div>
+
+                    <h3>Wireshark</h3>
+
+                    <p>
+                        Powerful network protocol analyzer for capturing
+                        and inspecting network traffic.
+                    </p>
+
+                    <a
+                        href="tools/wireshark/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- HYDRA -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-key"></i>
+                    </div>
+
+                    <h3>THC Hydra</h3>
+
+                    <p>
+                        Network authentication auditing tool used by
+                        security professionals to assess credential
+                        strength on supported services.
+                    </p>
+
+                    <a
+                        href="tools/hydra/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- JOHN -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-unlock-keyhole"></i>
+                    </div>
+
+                    <h3>John the Ripper</h3>
+
+                    <p>
+                        Password auditing and password-recovery tool
+                        commonly used to evaluate password strength.
+                    </p>
+
+                    <a
+                        href="tools/john-the-ripper/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- METASPLOIT -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-bomb"></i>
+                    </div>
+
+                    <h3>Metasploit</h3>
+
+                    <p>
+                        Security testing framework used for vulnerability
+                        research, validation, exploit development,
+                        and authorized penetration testing.
+                    </p>
+
+                    <a
+                        href="tools/metasploit/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- SQLMAP -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-database"></i>
+                    </div>
+
+                    <h3>SQLmap</h3>
+
+                    <p>
+                        Open-source tool designed to automate SQL
+                        injection detection and database security
+                        testing.
+                    </p>
+
+                    <a
+                        href="tools/sqlmap/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- NIKTO -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-shield-virus"></i>
+                    </div>
+
+                    <h3>Nikto</h3>
+
+                    <p>
+                        Web server scanner that checks for potentially
+                        dangerous files, outdated components, and
+                        common server configuration issues.
+                    </p>
+
+                    <a
+                        href="tools/nikto/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- GOBUSTER -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-folder-tree"></i>
+                    </div>
+
+                    <h3>Gobuster</h3>
+
+                    <p>
+                        Directory, DNS, and virtual-host enumeration
+                        tool used during authorized reconnaissance.
+                    </p>
+
+                    <a
+                        href="tools/gobuster/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- WAZUH -->
+            <div class="col-md-6 col-lg-4">
+
+                <div class="tool-card">
+
+                    <div class="tool-icon">
+                        <i class="fa-solid fa-eye"></i>
+                    </div>
+
+                    <h3>Wazuh</h3>
+
+                    <p>
+                        Open-source security platform for threat
+                        detection, monitoring, vulnerability detection,
+                        and security operations.
+                    </p>
+
+                    <a
+                        href="tools/wazuh/"
+                        class="btn btn-outline-custom"
+                    >
+                        View Guide
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- SAFETY -->
+<section class="section pt-0">
+
+    <div class="container">
+
+        <div class="info-box">
+
+            <i class="fa-solid fa-triangle-exclamation"></i>
+
+            <h3>Use Security Tools Responsibly</h3>
+
+            <p>
+                Kali Linux tools are powerful security-testing utilities.
+                Use them only against systems, applications, networks,
+                accounts, or devices that you own or have explicit
+                authorization to assess. The resources in this project
+                are intended for cybersecurity education, defensive
+                security, authorized penetration testing, and controlled
+                laboratory environments.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- CTA -->
+<section class="cta">
+
+    <div class="container">
+
+        <div class="cta-box">
+
+            <h2>
+                Build Your Cybersecurity Toolkit
+            </h2>
+
+            <p>
+                Explore the complete collection, read individual tool
+                guides, and follow the project as new cybersecurity
+                resources are added.
+            </p>
+
+            <div class="d-flex justify-content-center flex-wrap gap-3">
+
+                <a
+                    href="https://github.com/MdJahidShah/Best-Kali-Linux-tools"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="btn btn-primary-custom"
+                >
+                    <i class="fa-brands fa-github me-2"></i>
+                    View on GitHub
+                </a>
+
+                <a
+                    href="#categories"
+                    class="btn btn-outline-custom"
+                >
+                    Browse Categories
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- FOOTER -->
+<footer>
+
+    <div class="container">
+
+        <div class="row align-items-center g-3">
+
+            <div class="col-md-6">
+
+                <div class="footer-brand">
+                    Best Kali Linux Tools
+                </div>
+
+                <small>
+                    Cybersecurity learning & authorized security testing resources.
+                </small>
+
+            </div>
+
+            <div class="col-md-6 text-md-end">
+
+                <a
+                    href="https://github.com/MdJahidShah/Best-Kali-Linux-tools"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="me-3"
+                >
+                    <i class="fa-brands fa-github me-1"></i>
+                    GitHub
+                </a>
+
+                <a
+                    href="https://jahidshah.com"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                >
+                    Jahid Shah
+                </a>
+
+            </div>
+
+        </div>
+
+        <hr class="my-4" style="border-color: rgba(255,255,255,.08);">
+
+        <div class="text-center">
+
+            <small>
+                © <span id="year"></span> Md. Jahid Shah.
+                All rights reserved.
+            </small>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- Bootstrap JS -->
+<script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+</script>
+
+
+<!-- Dynamic Navbar -->
+<script>
+    fetch("navbar.html")
+        .then(response => {
+            if (!response.ok) {
+                throw new Error("Navbar could not be loaded.");
+            }
+
+            return response.text();
+        })
+        .then(data => {
+            document.getElementById("navbar").innerHTML = data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+</script>
+
+
+<!-- Current Year -->
+<script>
+    document.getElementById("year").textContent =
+        new Date().getFullYear();
+</script>
+
+</body>
+</html>
