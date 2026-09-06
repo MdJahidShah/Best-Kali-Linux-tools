@@ -880,3 +880,4 @@ Suggested repository description:
 ```text
 A practical installation, configuration, and authorized security-testing guide for THC Hydra.
 ```
+[Explore More Tools](https://labs.jahidshah.com/Best-Kali-Linux-tools/)
