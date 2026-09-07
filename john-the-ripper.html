@@ -1,1 +1,1283 @@
 
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<meta name="google-site-verification" content="UTxFHuoUYF8hWnwcz9oTUnR67fvD3Xpyu_o_zoDhXNQ" />
+		<title>John the Ripper: Complete Guide to Password Auditing</title>
+
+		<meta name="description" content="Complete John the Ripper guide covering installation, password hashes, wordlists, dictionary attacks, rules, incremental mode, sessions, troubleshooting, commands, and authorized password auditing.">
+
+		<meta name="keywords" content="John the Ripper, John the Ripper tutorial, JtR, password auditing, password cracking, Kali Linux John, John the Ripper commands, wordlist attack, dictionary attack, password hash, John rules, cybersecurity">
+
+		<meta name="author" content="Jahid Shah">
+
+		<link rel="canonical" href="https://labs.jahidshah.com/Best-Kali-Linux-tools/john-the-ripper.html/">
+
+		  <!-- Open Graph -->
+
+		  <meta property="og:title" content="John the Ripper: Complete Guide to Password Auditing">
+		  <meta property="og:description" content="Learn John the Ripper from beginner to advanced level, including installation, hash formats, wordlists, rules, cracking modes, sessions, troubleshooting, and practical lab usage.">
+		  <meta property="og:type" content="article">
+		  <meta property="og:url" content="https://labs.jahidshah.com/Best-Kali-Linux-tools/john-the-ripper.html/">
+		  <meta property="og:site_name" content="Jahid Shah Labs">
+
+		  <!-- Twitter -->
+
+		  <meta name="twitter:card" content="summary_large_image">
+		  <meta name="twitter:title" content="John the Ripper: Complete Guide to Password Auditing">
+		  <meta name="twitter:description" content="A complete John the Ripper tutorial covering password hashes, wordlists, rules, cracking modes, sessions, commands, troubleshooting, and authorized security auditing.">
+		  <meta name="twitter:site" content="@JahidShah">
+		  <meta name="twitter:creator" content="@JahidShah">
+
+		  <!-- Structured Data -->
+
+		  <script type="application/ld+json">
+		  {
+			"@context": "https://schema.org",
+			"@graph": [
+			  {
+				"@type": "WebSite",
+				"@id": "https://labs.jahidshah.com/#website",
+				"url": "https://labs.jahidshah.com/",
+				"name": "Jahid Shah Labs",
+				"description": "Interactive cybersecurity guides, demos, WordPress resources, and open-source security utilities created by Jahid Shah.",
+				"publisher": {
+				  "@id": "https://jahidshah.com/#person"
+				}
+			  },
+			  {
+				"@type": "Person",
+				"@id": "https://jahidshah.com/#person",
+				"name": "Jahid Shah",
+				"url": "https://jahidshah.com/",
+				"image": "https://labs.jahidshah.com/Images/Md_Jahid_Shah.png",
+				"jobTitle": "WordPress Developer & Security Specialist",
+				"worksFor": {
+				  "@type": "Organization",
+				  "name": "JS Security & Development",
+				  "url": "https://jahidshah.com/"
+				},
+				"sameAs": [
+				  "https://profiles.wordpress.org/jahidshah/",
+				  "https://github.com/MdJahidShah",
+				  "https://www.linkedin.com/in/jahidshah/",
+				  "https://x.com/JahidShahwp",
+				  "https://www.facebook.com/jahidwpsec/",
+				  "https://www.instagram.com/jahidshahwp/",
+				  "https://www.youtube.com/@JahidShahWP",
+				  "https://www.pinterest.com/jahidshahwp/",
+				  "https://businessbridgehub.com/"
+				]
+			  },
+			  {
+				"@type": "TechArticle",
+				"@id": "https://labs.jahidshah.com/Best-Kali-Linux-tools/john-the-ripper.html/#article",
+				"isPartOf": {
+				  "@id": "https://labs.jahidshah.com/#website"
+				},
+				"headline": "John the Ripper: Complete Guide to Password Auditing",
+				"description": "A comprehensive John the Ripper guide covering installation, password hashes, wordlists, dictionary attacks, rules, incremental mode, sessions, troubleshooting, commands, and authorized password auditing.",
+				"author": {
+				  "@id": "https://jahidshah.com/#person"
+				},
+				"publisher": {
+				  "@id": "https://jahidshah.com/#person"
+				},
+				"mainEntityOfPage": {
+				  "@type": "WebPage",
+				  "@id": "https://labs.jahidshah.com/Best-Kali-Linux-tools/john-the-ripper.html/"
+				},
+				"articleSection": "Cybersecurity & Password Auditing",
+				"keywords": [
+				  "John the Ripper",
+				  "JtR",
+				  "password auditing",
+				  "password cracking",
+				  "Kali Linux",
+				  "wordlists",
+				  "password hashes",
+				  "John rules"
+				],
+				"inLanguage": "en-US"
+			  }
+			]
+		  }
+		  </script>
+
+		  <style>
+			body {
+			  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+				Oxygen, Ubuntu, Cantarell, sans-serif;
+			  line-height: 1.68;
+			  color: #1f2937;
+			  max-width: 860px;
+			  margin: 0 auto;
+			  padding: 24px;
+			}
+
+			h1 {
+			  font-size: 2.2rem;
+			  color: #111827;
+			  margin-bottom: 0.5rem;
+			}
+
+			h2 {
+			  font-size: 1.5rem;
+			  color: #1f2937;
+			  margin-top: 2rem;
+			  border-bottom: 2px solid #f3f4f6;
+			  padding-bottom: 0.3rem;
+			}
+
+			h3 {
+			  font-size: 1.2rem;
+			  color: #374151;
+			  margin-top: 1.2rem;
+			}
+
+			code {
+			  background: #f3f4f6;
+			  color: #b91c1c;
+			  padding: 2px 6px;
+			  border-radius: 4px;
+			  font-size: 0.9em;
+			}
+
+			pre {
+			  background: #111827;
+			  color: #f9fafb;
+			  padding: 16px;
+			  border-radius: 8px;
+			  overflow-x: auto;
+			  font-size: 0.92rem;
+			}
+
+			pre code {
+			  background: none;
+			  color: inherit;
+			  padding: 0;
+			}
+
+			table {
+			  width: 100%;
+			  border-collapse: collapse;
+			  margin: 20px 0;
+			  font-size: 0.95rem;
+			}
+
+			th,
+			td {
+			  border: 1px solid #e5e7eb;
+			  padding: 10px 14px;
+			  text-align: left;
+			}
+
+			th {
+			  background: #f9fafb;
+			  font-weight: 600;
+			}
+
+			blockquote {
+			  border-left: 4px solid #2563eb;
+			  margin: 18px 0;
+			  padding: 10px 18px;
+			  background: #eff6ff;
+			  color: #1e40af;
+			  border-radius: 0 6px 6px 0;
+			}
+
+			.author-box {
+			  border-top: 1px solid #e5e7eb;
+			  padding-top: 20px;
+			  margin-top: 40px;
+			}
+		  </style>
+
+	</head>
+
+	<body>
+
+	  <header>
+		<h1>How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide</h1>
+		<p><em>Published by <a href="https://jahidshah.com/">Jahid Shah</a> | Technical Security &amp; Linux Administration Guide</em></p>
+	  </header>
+
+	  <main>
+		<article class="tool-guide">
+
+			<header class="article-header">
+				<span class="article-category">CYBERSECURITY • PASSWORD AUDITING</span>
+
+				<h1>John the Ripper: Complete Guide to Password Auditing</h1>
+
+				<p class="article-lead">
+					John the Ripper is one of the most widely used password-auditing
+					and password-recovery tools in cybersecurity. It can test password
+					hashes using dictionary attacks, word-mangling rules, single-crack
+					techniques, incremental attacks, and other configurable methods.
+				</p>
+
+				<div class="article-meta">
+					<span>Beginner → Advanced</span>
+					<span>•</span>
+					<span>John the Ripper / JtR</span>
+				</div>
+			</header>
+
+
+			<!-- AUTHORIZATION -->
+			<section class="warning-box">
+				<h2>⚠️ Authorization &amp; Legal Notice</h2>
+
+				<p>
+					John the Ripper should only be used for systems, password hashes,
+					files, and accounts that you own or have explicit authorization
+					to audit.
+				</p>
+
+				<p>
+					The examples in this guide are intended for cybersecurity
+					education, laboratory environments, password auditing, and
+					authorized penetration testing. Do not use recovered credentials
+					or password hashes to access accounts or systems without
+					permission.
+				</p>
+			</section>
+
+
+			<!-- INTRODUCTION -->
+			<section>
+				<h2>1. What Is John the Ripper?</h2>
+
+				<p>
+					<strong>John the Ripper (JtR)</strong> is a password-cracking and
+					password-auditing tool originally designed to identify weak Unix
+					passwords. Modern versions support a very large collection of
+					password-hash and encrypted-file formats, particularly in the
+					<strong>Jumbo</strong> build.
+				</p>
+
+				<p>
+					The fundamental idea is simple: John takes a password hash and
+					generates candidate passwords. It applies the appropriate hashing
+					process to each candidate and compares the resulting value with
+					the target hash. When the values match, the original password has
+					been recovered.
+				</p>
+
+				<p>
+					John combines several cracking modes and is highly configurable.
+					Its official documentation describes wordlist, single-crack,
+					incremental, and external modes among its major capabilities.
+				</p>
+			</section>
+
+
+			<!-- WHY -->
+			<section>
+				<h2>2. Why Is John the Ripper Important?</h2>
+
+				<p>
+					Password auditing is important because a password can appear
+					strong to a human while still being predictable to an automated
+					password-auditing tool.
+				</p>
+
+				<p>Security professionals can use John to:</p>
+
+				<ul>
+					<li>Identify weak passwords in an authorized password audit.</li>
+					<li>Evaluate organizational password policies.</li>
+					<li>Test the effectiveness of password hashing.</li>
+					<li>Recover passwords from authorized encrypted data.</li>
+					<li>Demonstrate the risks of password reuse.</li>
+					<li>Evaluate custom password dictionaries and rules.</li>
+					<li>Support incident-response and forensic investigations.</li>
+				</ul>
+			</section>
+
+
+			<!-- HOW IT WORKS -->
+			<section>
+				<h2>3. How Password Cracking Works</h2>
+
+				<p>
+					John does not normally "decrypt" a password hash. A cryptographic
+					password hash is designed to be one-way. Instead, John generates
+					possible passwords and tests them against the hash.
+				</p>
+
+				<div class="flow-diagram">
+					<div>Password Candidate</div>
+					<span>→</span>
+					<div>Hash Function</div>
+					<span>→</span>
+					<div>Generated Hash</div>
+					<span>→</span>
+					<div>Compare</div>
+					<span>→</span>
+					<div>Match / No Match</div>
+				</div>
+
+				<p>
+					For example, if a laboratory hash corresponds to the password
+					<code>Cyber123!</code>, John may eventually generate that candidate.
+					If its calculated hash matches the target hash, the password has
+					been recovered.
+				</p>
+			</section>
+
+
+			<!-- HASH THEORY -->
+			<section>
+				<h2>4. Password Hashes: The Theory You Need</h2>
+
+				<h3>Hashing vs Encryption</h3>
+
+				<p>
+					<strong>Encryption</strong> is designed to be reversible when the
+					correct key is available. <strong>Hashing</strong> is designed as
+					a one-way transformation.
+				</p>
+
+				<p>
+					Password systems therefore normally store a password-derived hash
+					rather than the plaintext password.
+				</p>
+
+				<h3>Salts</h3>
+
+				<p>
+					A <strong>salt</strong> is additional random data incorporated into
+					password hashing. Properly designed salted password hashing makes
+					precomputed attacks much less useful and ensures that identical
+					passwords do not necessarily produce identical stored hashes.
+				</p>
+
+				<h3>Fast vs Slow Password Hashing</h3>
+
+				<p>
+					Algorithms designed for password storage intentionally make
+					password verification computationally expensive. Modern password
+					hashing approaches such as bcrypt, scrypt, and Argon2 are designed
+					to make large-scale guessing substantially more expensive than
+					using fast general-purpose hashes.
+				</p>
+
+				<p>
+					This is why the hash algorithm matters just as much as the password
+					itself when evaluating password security.
+				</p>
+			</section>
+
+
+			<!-- INSTALL -->
+			<section>
+				<h2>5. Installing John the Ripper</h2>
+
+				<h3>Kali Linux / Debian-based Linux</h3>
+
+				<pre><code>sudo apt update
+		sudo apt install john</code></pre>
+
+				<p>Verify the installation:</p>
+
+				<pre><code>john --version</code></pre>
+
+				<p>
+					Depending on the operating system and package, the available
+					formats and features can differ. For advanced auditing, security
+					professionals should understand whether they are using a standard
+					John build or a Jumbo build.
+				</p>
+			</section>
+
+
+			<!-- BASIC SYNTAX -->
+			<section>
+				<h2>6. Basic John the Ripper Syntax</h2>
+
+				<pre><code>john [options] [password-file]</code></pre>
+
+				<p>
+					The password file contains password hashes or another supported
+					input format. Options control the attack mode, hash format,
+					wordlist, session handling, and other behavior.
+				</p>
+
+				<h3>Basic execution</h3>
+
+				<pre><code>john hashes.txt</code></pre>
+
+				<p>
+					With no specific cracking mode selected, John follows its
+					configured sequence of cracking modes. The official examples
+					describe a typical progression beginning with single-crack mode,
+					followed by wordlist mode and then incremental mode.
+				</p>
+			</section>
+
+
+			<!-- MODES -->
+			<section>
+				<h2>7. John the Ripper Cracking Modes</h2>
+
+				<p>
+					Choosing the correct mode is one of the most important parts of
+					using John efficiently.
+				</p>
+
+
+				<h3>7.1 Single Crack Mode</h3>
+
+				<p>
+					Single-crack mode generates candidates using information associated
+					with accounts, such as login names and GECOS/full-name information,
+					together with password-mangling rules.
+				</p>
+
+				<pre><code>john --single hashes.txt</code></pre>
+
+				<p>
+					This mode can be very effective when passwords are based on
+					predictable personal information.
+				</p>
+
+
+				<h3>7.2 Wordlist Mode</h3>
+
+				<p>
+					Wordlist mode tests candidate passwords from a text file. Each
+					line normally represents a candidate word.
+				</p>
+
+				<pre><code>john --wordlist=/path/to/wordlist.txt hashes.txt</code></pre>
+
+				<p>
+					Wordlists are particularly effective when passwords are based on
+					common words, leaked-password patterns, names, locations, brands,
+					or predictable modifications.
+				</p>
+
+
+				<h3>7.3 Wordlist + Rules</h3>
+
+				<p>
+					John can transform words from a wordlist using rules. This allows
+					one source word to generate many password candidates.
+				</p>
+
+				<pre><code>john --wordlist=/path/to/wordlist.txt --rules hashes.txt</code></pre>
+
+				<p>
+					For example, a source word such as <code>security</code> could be
+					transformed into multiple variations involving capitalization,
+					numbers, substitutions, or appended characters.
+				</p>
+
+
+				<h3>7.4 Incremental Mode</h3>
+
+				<p>
+					Incremental mode can attempt combinations across a configured
+					character set. It is extremely powerful but can have an enormous
+					search space.
+				</p>
+
+				<pre><code>john --incremental hashes.txt</code></pre>
+
+				<p>
+					Incremental mode does not simply generate random strings. John
+					uses character-frequency information to prioritize candidates.
+					Because the theoretical search space can become enormous, such
+					attacks may run for a very long time.
+				</p>
+
+
+				<h3>7.5 External Mode</h3>
+
+				<p>
+					Advanced users can define custom candidate-generation or filtering
+					logic using John's external mode and configuration system.
+				</p>
+
+				<pre><code>john --external=MODE hashes.txt</code></pre>
+
+				<p>
+					External modes are useful when standard candidate-generation
+					strategies do not adequately represent a specific authorized
+					auditing scenario.
+				</p>
+			</section>
+
+
+			<!-- WORDLIST -->
+			<section>
+				<h2>8. Wordlists</h2>
+
+				<p>
+					A wordlist is simply a collection of candidate passwords. The
+					quality and ordering of a wordlist can have a major effect on
+					auditing efficiency.
+				</p>
+
+				<p>A useful wordlist may contain:</p>
+
+				<ul>
+					<li>Common passwords.</li>
+					<li>Dictionary words.</li>
+					<li>Common password variations.</li>
+					<li>Organization-approved test passwords.</li>
+					<li>Custom laboratory candidates.</li>
+				</ul>
+
+				<h3>Example custom wordlist</h3>
+
+				<pre><code>nano lab-wordlist.txt</code></pre>
+
+				<p>Example contents:</p>
+
+				<pre><code>password
+		Password
+		Password123
+		Security123
+		Cybersecurity
+		Cyber123!</code></pre>
+
+				<p>
+					Use only intentionally created test data in a learning environment.
+				</p>
+			</section>
+
+
+			<!-- ROCKYOU -->
+			<section>
+				<h2>9. RockYou and Large Wordlists</h2>
+
+				<p>
+					Kali Linux commonly includes the RockYou wordlist in compressed
+					form. Depending on the installation, its location may be:
+				</p>
+
+				<pre><code>/usr/share/wordlists/rockyou.txt.gz</code></pre>
+
+				<p>
+					If the file is present and you are working in an authorized
+					laboratory, it can be decompressed before use.
+				</p>
+
+				<pre><code>sudo gzip -d /usr/share/wordlists/rockyou.txt.gz</code></pre>
+
+				<p>
+					Large wordlists can significantly increase the number of
+					candidates tested, but larger does not automatically mean better.
+					A smaller, well-targeted wordlist can sometimes be considerably
+					more efficient.
+				</p>
+			</section>
+
+
+			<!-- RULES -->
+			<section>
+				<h2>10. John the Ripper Rules</h2>
+
+				<p>
+					Rules are one of John's most powerful features. Instead of testing
+					only the exact words in a wordlist, rules modify those words to
+					generate additional candidates.
+				</p>
+
+				<p>Conceptually:</p>
+
+				<pre><code>word
+		↓
+		capitalize
+		↓
+		append number
+		↓
+		append symbol
+		↓
+		password candidate</code></pre>
+
+				<p>
+					John provides an extensive rule syntax supporting transformations,
+					reject conditions, character classes, variables, and preprocessing.
+				</p>
+
+				<p>
+					This makes rules useful for modelling common human password
+					construction behavior.
+				</p>
+
+
+				<h3>Using the default rules</h3>
+
+				<pre><code>john --wordlist=wordlist.txt --rules hashes.txt</code></pre>
+
+				<p>
+					Custom rules can be defined in John's configuration file.
+				</p>
+			</section>
+
+
+			<!-- FORMAT -->
+			<section>
+				<h2>11. Hash Formats</h2>
+
+				<p>
+					John supports many different password and encrypted-data formats.
+					The exact formats available depend on the build.
+				</p>
+
+				<p>
+					You can inspect available formats with:
+				</p>
+
+				<pre><code>john --list=formats</code></pre>
+
+				<p>
+					When automatic detection does not select the expected format, a
+					format can be explicitly specified:
+				</p>
+
+				<pre><code>john --format=FORMAT hashes.txt</code></pre>
+
+				<p>
+					Using the wrong format is a common reason for messages such as
+					<code>No password hashes loaded</code>.
+				</p>
+			</section>
+
+
+			<!-- STATUS -->
+			<section>
+				<h2>12. Monitoring a Cracking Session</h2>
+
+				<p>
+					John can report the current state of a running or interrupted
+					session.
+				</p>
+
+				<pre><code>john --status</code></pre>
+
+				<p>
+					During a running session, pressing a key in the terminal can also
+					cause John to display its current status.
+				</p>
+
+				<p>
+					Depending on the mode, useful information can include candidate
+					rate, progress, elapsed time, and the current cracking state.
+				</p>
+			</section>
+
+
+			<!-- SESSIONS -->
+			<section>
+				<h2>13. Sessions and Long-Running Jobs</h2>
+
+				<p>
+					Password auditing can take minutes, hours, or substantially longer.
+					John therefore provides session management.
+				</p>
+
+				<h3>Create a named session</h3>
+
+				<pre><code>john --session=lab-audit hashes.txt</code></pre>
+
+				<h3>Check status</h3>
+
+				<pre><code>john --status=lab-audit</code></pre>
+
+				<h3>Restore a session</h3>
+
+				<pre><code>john --restore=lab-audit</code></pre>
+
+				<p>
+					Named sessions are especially useful when several authorized
+					password-auditing jobs are being performed.
+				</p>
+			</section>
+
+
+			<!-- SHOW -->
+			<section>
+				<h2>14. Displaying Recovered Passwords</h2>
+
+				<p>
+					John stores recovered password information in its internal
+					password database, commonly referred to as the <code>john.pot</code>
+					file.
+				</p>
+
+				<p>
+					Use John's own interface to display recovered passwords:
+				</p>
+
+				<pre><code>john --show hashes.txt</code></pre>
+
+				<p>
+					This is preferable to manually inspecting the internal pot file.
+				</p>
+			</section>
+
+
+			<!-- PRACTICAL LAB -->
+			<section>
+				<h2>15. Complete Authorized Laboratory Workflow</h2>
+
+				<p>
+					The following workflow demonstrates the general process without
+					targeting real credentials.
+				</p>
+
+				<h3>Step 1 — Prepare a laboratory hash</h3>
+
+				<p>
+					Create a password and corresponding hash using a controlled
+					laboratory environment.
+				</p>
+
+				<h3>Step 2 — Save the hash</h3>
+
+				<pre><code>nano hashes.txt</code></pre>
+
+				<h3>Step 3 — Prepare a small wordlist</h3>
+
+				<pre><code>nano lab-wordlist.txt</code></pre>
+
+				<h3>Step 4 — Run a dictionary audit</h3>
+
+				<pre><code>john --wordlist=lab-wordlist.txt hashes.txt</code></pre>
+
+				<h3>Step 5 — Display results</h3>
+
+				<pre><code>john --show hashes.txt</code></pre>
+
+				<h3>Step 6 — Try word-mangling rules</h3>
+
+				<pre><code>john --wordlist=lab-wordlist.txt --rules hashes.txt</code></pre>
+
+				<h3>Step 7 — Monitor a named session</h3>
+
+				<pre><code>john --session=lab hashes.txt</code></pre>
+
+				<pre><code>john --status=lab</code></pre>
+
+				<h3>Step 8 — Restore if interrupted</h3>
+
+				<pre><code>john --restore=lab</code></pre>
+
+				<p>
+					This workflow illustrates the fundamental password-auditing
+					lifecycle:
+				</p>
+
+				<div class="flow-diagram">
+					<div>Hash</div>
+					<span>→</span>
+					<div>Identify Format</div>
+					<span>→</span>
+					<div>Generate Candidates</div>
+					<span>→</span>
+					<div>Test</div>
+					<span>→</span>
+					<div>Report</div>
+				</div>
+			</section>
+
+
+			<!-- INCREMENTAL -->
+			<section>
+				<h2>16. Understanding Incremental Attacks</h2>
+
+				<p>
+					Incremental mode attempts combinations from a configured character
+					set. The theoretical search space grows rapidly as password length
+					increases.
+				</p>
+
+				<p>
+					If a character set contains <code>N</code> possible characters and
+					the password length is <code>L</code>, the number of possible
+					combinations for exactly that length is:
+				</p>
+
+				<pre><code>N^L</code></pre>
+
+				<p>
+					For example, a 10-character password selected from 62 possible
+					alphanumeric characters has:
+				</p>
+
+				<pre><code>62^10</code></pre>
+
+				<p>
+					possible combinations before considering smarter candidate
+					ordering or password-specific weaknesses.
+				</p>
+
+				<p>
+					This demonstrates why password length, character space, hashing
+					cost, and candidate-generation strategy all matter.
+				</p>
+			</section>
+
+
+			<!-- PERFORMANCE -->
+			<section>
+				<h2>17. Performance and Cracking Speed</h2>
+
+				<p>
+					John reports password-candidate processing rates, but raw speed
+					should never be interpreted as the complete measure of password
+					security.
+				</p>
+
+				<p>Performance depends on factors such as:</p>
+
+				<ul>
+					<li>Hash algorithm.</li>
+					<li>Password length.</li>
+					<li>Number of candidate passwords.</li>
+					<li>Number of hashes.</li>
+					<li>Salt configuration.</li>
+					<li>CPU performance.</li>
+					<li>Parallelization.</li>
+					<li>John build and implementation.</li>
+					<li>Selected cracking mode.</li>
+				</ul>
+
+				<p>
+					Fast hashes can be tested extremely quickly, while deliberately
+					expensive password-hashing algorithms significantly reduce the
+					number of guesses an attacker can perform.
+				</p>
+			</section>
+
+
+			<!-- BENCHMARK -->
+			<section>
+				<h2>18. Benchmarking John</h2>
+
+				<p>
+					John includes benchmarking functionality for evaluating the
+					performance of supported algorithms.
+				</p>
+
+				<pre><code>john --test</code></pre>
+
+				<p>
+					You can also restrict testing to a particular supported format:
+				</p>
+
+				<pre><code>john --test --format=FORMAT</code></pre>
+
+				<p>
+					Benchmark results are useful when evaluating the relative
+					performance of different systems or configurations.
+				</p>
+			</section>
+
+
+			<!-- CONFIG -->
+			<section>
+				<h2>19. John's Configuration System</h2>
+
+				<p>
+					John is highly configurable. Its configuration file can define
+					global options, wordlists, rules, incremental modes, and external
+					modes.
+				</p>
+
+				<p>
+					Depending on the platform, the configuration file is generally
+					called:
+				</p>
+
+				<pre><code>john.conf</code></pre>
+
+				<p>or:</p>
+
+				<pre><code>john.ini</code></pre>
+
+				<p>
+					Advanced users can customize John to represent specific authorized
+					password-auditing requirements.
+				</p>
+			</section>
+
+
+			<!-- TROUBLESHOOTING -->
+			<section>
+				<h2>20. Common Problems and Solutions</h2>
+
+				<h3>"No password hashes loaded"</h3>
+
+				<p><strong>Possible causes:</strong></p>
+
+				<ul>
+					<li>Incorrect hash format.</li>
+					<li>Malformed input.</li>
+					<li>Unsupported format.</li>
+					<li>Incorrect file contents.</li>
+				</ul>
+
+				<p><strong>Approach:</strong></p>
+
+				<pre><code>john --list=formats</code></pre>
+
+				<p>
+					Verify that the supplied hash corresponds to a format supported by
+					the installed build.
+				</p>
+
+
+				<h3>Wordlist not found</h3>
+
+				<p>
+					Verify the path:
+				</p>
+
+				<pre><code>ls -lh /path/to/wordlist.txt</code></pre>
+
+
+				<h3>John is taking too long</h3>
+
+				<p>
+					This may be completely normal. Incremental attacks can have enormous
+					search spaces, and slow password hashes intentionally reduce
+					candidate-processing speed.
+				</p>
+
+				<p>
+					Consider the selected mode, wordlist size, rules, hash algorithm,
+					password length, and available hardware before assuming something
+					is broken.
+				</p>
+
+
+				<h3>Session interrupted</h3>
+
+				<p>
+					Use a named session and restore it:
+				</p>
+
+				<pre><code>john --restore=lab</code></pre>
+			</section>
+
+
+			<!-- JOHN VS HASHCAT -->
+			<section>
+				<h2>21. John the Ripper vs Hashcat</h2>
+
+				<p>
+					John the Ripper and Hashcat are both powerful password-auditing
+					tools, but their workflows and strengths differ.
+				</p>
+
+				<table>
+					<thead>
+						<tr>
+							<th>Feature</th>
+							<th>John the Ripper</th>
+							<th>Hashcat</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Primary use</td>
+							<td>Password auditing and recovery</td>
+							<td>Password recovery and auditing</td>
+						</tr>
+						<tr>
+							<td>CPU usage</td>
+							<td>Strong</td>
+							<td>Supported</td>
+						</tr>
+						<tr>
+							<td>GPU focus</td>
+							<td>Available depending on build/workflow</td>
+							<td>Major strength</td>
+						</tr>
+						<tr>
+							<td>Rules</td>
+							<td>Very powerful</td>
+							<td>Very powerful</td>
+						</tr>
+						<tr>
+							<td>Formats</td>
+							<td>Extensive, especially Jumbo</td>
+							<td>Extensive</td>
+						</tr>
+						<tr>
+							<td>Learning curve</td>
+							<td>Moderate</td>
+							<td>Moderate to advanced</td>
+						</tr>
+					</tbody>
+				</table>
+
+				<p>
+					The right tool depends on the hash type, hardware, workflow,
+					required attack strategy, and auditing objective.
+				</p>
+			</section>
+
+
+			<!-- HYDRA -->
+			<section>
+				<h2>22. John the Ripper vs Hydra</h2>
+
+				<p>
+					John and Hydra solve different problems.
+				</p>
+
+				<ul>
+					<li>
+						<strong>John the Ripper:</strong>
+						Primarily focused on offline password/hash auditing and
+						password recovery.
+					</li>
+
+					<li>
+						<strong>Hydra:</strong>
+						Primarily designed for testing authentication services and
+						network login mechanisms in authorized environments.
+					</li>
+				</ul>
+
+				<p>
+					They should not be treated as interchangeable tools.
+				</p>
+			</section>
+
+
+			<!-- DEFENSE -->
+			<section>
+				<h2>23. What John Teaches Us About Password Security</h2>
+
+				<p>
+					The most valuable result of a password audit is not the recovered
+					password itself. It is understanding why that password was
+					recoverable.
+				</p>
+
+				<h3>Use strong passwords</h3>
+
+				<p>
+					Longer, unpredictable passwords dramatically increase the candidate
+					search space.
+				</p>
+
+				<h3>Avoid password reuse</h3>
+
+				<p>
+					Reusing passwords creates a single point of failure. A compromised
+					password can potentially affect multiple services.
+				</p>
+
+				<h3>Use password managers</h3>
+
+				<p>
+					Password managers make it practical to use unique, high-entropy
+					passwords for different services.
+				</p>
+
+				<h3>Use MFA</h3>
+
+				<p>
+					Multi-factor authentication provides an additional security layer
+					even if a password is compromised.
+				</p>
+
+				<h3>Use modern password hashing</h3>
+
+				<p>
+					Applications should use password-specific, deliberately expensive
+					hashing algorithms with unique salts rather than fast general
+					purpose hashes.
+				</p>
+			</section>
+
+
+			<!-- CHEAT SHEET -->
+			<section>
+				<h2>24. John the Ripper Command Cheat Sheet</h2>
+
+				<div class="table-wrapper">
+					<table>
+						<thead>
+							<tr>
+								<th>Command</th>
+								<th>Purpose</th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td><code>john hashes.txt</code></td>
+								<td>Run John's default cracking sequence.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --single hashes.txt</code></td>
+								<td>Use single-crack mode.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --wordlist=words.txt hashes.txt</code></td>
+								<td>Use a specified wordlist.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --wordlist=words.txt --rules hashes.txt</code></td>
+								<td>Use wordlist mode with rules.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --incremental hashes.txt</code></td>
+								<td>Use incremental mode.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --format=FORMAT hashes.txt</code></td>
+								<td>Force a specific hash format.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --show hashes.txt</code></td>
+								<td>Display recovered passwords.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --status</code></td>
+								<td>Display session status.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --session=NAME hashes.txt</code></td>
+								<td>Start a named session.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --restore=NAME</code></td>
+								<td>Restore an interrupted session.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --test</code></td>
+								<td>Benchmark supported algorithms.</td>
+							</tr>
+
+							<tr>
+								<td><code>john --list=formats</code></td>
+								<td>List available hash formats.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+
+			<!-- WORKFLOW -->
+			<section>
+				<h2>25. Recommended Password-Auditing Workflow</h2>
+
+				<ol>
+					<li>Obtain explicit authorization.</li>
+					<li>Identify the hash format.</li>
+					<li>Preserve the original evidence.</li>
+					<li>Start with efficient candidate sources.</li>
+					<li>Use an appropriate wordlist.</li>
+					<li>Apply rules when justified.</li>
+					<li>Use single-crack techniques when appropriate.</li>
+					<li>Use incremental techniques only when the search space is reasonable.</li>
+					<li>Monitor performance and session state.</li>
+					<li>Document recovered and unrecovered credentials securely.</li>
+					<li>Report password-policy weaknesses.</li>
+					<li>Recommend remediation.</li>
+				</ol>
+			</section>
+
+
+			<!-- FINAL -->
+			<section>
+				<h2>26. Final Takeaway</h2>
+
+				<p>
+					John the Ripper is more than a simple password-cracking command.
+					It is a flexible password-auditing framework that combines
+					candidate generation, wordlists, rules, hash formats, session
+					management, incremental attacks, benchmarking, and extensive
+					configuration.
+				</p>
+
+				<p>
+					The most important concept is understanding the relationship between
+					<strong>password entropy, candidate generation, hash algorithms,
+					computational cost, and time</strong>.
+				</p>
+
+				<p>
+					Used responsibly, John can help security professionals discover
+					weak passwords before attackers do and provide measurable evidence
+					for improving an organization's authentication security.
+				</p>
+			</section>
+
+
+			<!-- SOURCES -->
+			<section class="references">
+				<h2>Official References</h2>
+
+				<ul>
+					<li>
+						<a href="https://www.openwall.com/john/doc/" target="_blank"
+						   rel="noopener noreferrer">
+							John the Ripper Official Documentation
+						</a>
+					</li>
+
+					<li>
+						<a href="https://www.openwall.com/john/doc/MODES.shtml"
+						   target="_blank" rel="noopener noreferrer">
+							John the Ripper Cracking Modes
+						</a>
+					</li>
+
+					<li>
+						<a href="https://www.openwall.com/john/doc/OPTIONS.shtml"
+						   target="_blank" rel="noopener noreferrer">
+							John the Ripper Command-Line Options
+						</a>
+					</li>
+
+					<li>
+						<a href="https://www.openwall.com/john/doc/RULES.shtml"
+						   target="_blank" rel="noopener noreferrer">
+							John the Ripper Wordlist Rules
+						</a>
+					</li>
+
+					<li>
+						<a href="https://www.openwall.com/john/doc/EXAMPLES.shtml"
+						   target="_blank" rel="noopener noreferrer">
+							John the Ripper Usage Examples
+						</a>
+					</li>
+				</ul>
+			</section>
+
+		</article>
+	  </main>
+
+	  <footer class="author-box">
+		<p><strong>About the Author:</strong> <a href="https://jahidshah.com/">Jahid Shah</a> is a WordPress developer and security specialist focusing on malware remediation, API hardening, and server infrastructure at <a href="https://labs.jahidshah.com/">Jahid Shah Labs</a>.</p>
+	  </footer>
+
+	</body>
+
+</html>
