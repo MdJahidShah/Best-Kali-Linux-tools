@@ -109,9 +109,6 @@
         }
 
         /* SECTIONS */
-        .section {
-            padding: 85px 20px;
-        }
 
         .section-title {
             font-size: 2rem;
@@ -173,7 +170,7 @@
         }
 
         /* TOOL CARDS */
-        .tool-card {
+        .tool-card, .device-card {
             height: 100%;
             background: var(--card);
             border: 1px solid var(--border);
@@ -182,12 +179,12 @@
             transition: .25s ease;
         }
 
-        .tool-card:hover {
+        .tool-card:hover, .device-card:hover {
             transform: translateY(-5px);
             border-color: rgba(0,217,255,.35);
         }
 
-        .tool-icon {
+        .tool-icon, .device-icon {
             width: 48px;
             height: 48px;
             border-radius: 10px;
@@ -200,19 +197,19 @@
             margin-bottom: 18px;
         }
 
-        .tool-card h3 {
+        .tool-card h3, .device-card h3 {
             font-size: 1.15rem;
             margin-bottom: 10px;
         }
 
-        .tool-card p {
+        .tool-card p, .device-card p {
             color: var(--muted);
             font-size: .9rem;
             line-height: 1.65;
             min-height: 72px;
         }
 
-        .tool-card .btn {
+        .tool-card .btn, .device-card .btn {
             margin-top: 8px;
             font-size: .85rem;
         }
