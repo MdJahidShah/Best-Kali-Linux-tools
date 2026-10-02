@@ -1,175 +1,197 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="google-site-verification" content="UTxFHuoUYF8hWnwcz9oTUnR67fvD3Xpyu_o_zoDhXNQ" />
-  <title>How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide</title>
-  <meta name="description" content="Master ClamAV on Linux. Learn how to install, update signatures, scan directories, isolate threats, and automate server security with cron jobs.">
-  <meta name="keywords" content="ClamAV, Linux malware scanner, install ClamAV, freshclam, clamscan, server security, clamdscan, Linux antivirus">
-  <meta name="author" content="Jahid Shah">
-  <link rel="canonical" href="https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="UTxFHuoUYF8hWnwcz9oTUnR67fvD3Xpyu_o_zoDhXNQ" />
+    <title>How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide</title>
+    <meta name="description" content="Master ClamAV on Linux. Learn how to install, update signatures, scan directories, isolate threats, and automate server security with cron jobs.">
+    <meta name="keywords" content="ClamAV, Linux malware scanner, install ClamAV, freshclam, clamscan, server security, clamdscan, Linux antivirus">
+    <meta name="author" content="Jahid Shah">
+    <link rel="canonical" href="https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html">
 
-  <meta property="og:title" content="How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide">
-  <meta property="og:description" content="Step-by-step tutorial on installing, configuring, and automating ClamAV antivirus on Ubuntu, Debian, and Linux servers.">
-  <meta property="og:type" content="article">
-  <meta property="og:url" content="https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html">
-  <meta property="og:site_name" content="Jahid Shah Labs">
+    <meta property="og:title" content="How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide">
+    <meta property="og:description" content="Step-by-step tutorial on installing, configuring, and automating ClamAV antivirus on Ubuntu, Debian, and Linux servers.">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html">
+    <meta property="og:site_name" content="Jahid Shah Labs">
 
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide">
-  <meta name="twitter:description" content="Master ClamAV antivirus on Linux: installation, daily signature updates, recursive directory scans, and automated cron setups.">
-  <meta name="twitter:site" content="@JahidShahwp">
-  <meta name="twitter:creator" content="@JahidShahwp">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide">
+    <meta name="twitter:description" content="Master ClamAV antivirus on Linux: installation, daily signature updates, recursive directory scans, and automated cron setups.">
+    <meta name="twitter:site" content="@JahidShahwp">
+    <meta name="twitter:creator" content="@JahidShahwp">
+  
+      <!-- Bootstrap -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" >
+      <!-- Font Awesome -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
+      <!-- Project stylesheet -->
+      <link rel="stylesheet" href="https://labs.jahidshah.com/pro-style.css">
 
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@graph": [
+      <script type="application/ld+json">
       {
-        "@type": "WebSite",
-        "@id": "https://labs.jahidshah.com/#website",
-        "url": "https://labs.jahidshah.com/",
-        "name": "Jahid Shah Labs",
-        "description": "Interactive demos, WordPress themes, plugins, and open-source security utilities created by Jahid Shah.",
-        "publisher": {
-          "@id": "https://jahidshah.com/#person"
-        }
-      },
-      {
-        "@type": "Person",
-        "@id": "https://jahidshah.com/#person",
-        "name": "Jahid Shah",
-        "url": "https://jahidshah.com/",
-        "image": "https://labs.jahidshah.com/Images/Md_Jahid_Shah.png",
-        "jobTitle": "WordPress Developer & Security Specialist",
-        "worksFor": {
-          "@type": "Organization",
-          "name": "Jahid Shah",
-          "url": "https://jahidshah.com/"
-        },
-        "sameAs": [
-          "https://profiles.wordpress.org/jahidshah/",
-          "https://github.com/MdJahidShah",
-          "https://www.linkedin.com/in/jahidshah/",
-          "https://x.com/JahidShahwp",
-          "https://www.facebook.com/jahidwpsec/",
-          "https://www.instagram.com/jahidshahwp/",
-          "https://www.youtube.com/@JahidShahWP",
-          "https://www.pinterest.com/jahidshahwp/",
-          "https://businessbridgehub.com/"
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://labs.jahidshah.com/#website",
+            "url": "https://labs.jahidshah.com/",
+            "name": "Jahid Shah Labs",
+            "description": "Interactive demos, WordPress themes, plugins, and open-source security utilities created by Jahid Shah.",
+            "publisher": {
+              "@id": "https://jahidshah.com/#person"
+            }
+          },
+          {
+            "@type": "Person",
+            "@id": "https://jahidshah.com/#person",
+            "name": "Jahid Shah",
+            "url": "https://jahidshah.com/",
+            "image": "https://labs.jahidshah.com/Images/Md_Jahid_Shah.png",
+            "jobTitle": "WordPress Developer & Security Specialist",
+            "worksFor": {
+              "@type": "Organization",
+              "name": "Jahid Shah",
+              "url": "https://jahidshah.com/"
+            },
+            "sameAs": [
+              "https://profiles.wordpress.org/jahidshah/",
+              "https://github.com/MdJahidShah",
+              "https://www.linkedin.com/in/jahidshah/",
+              "https://x.com/JahidShahwp",
+              "https://www.facebook.com/jahidwpsec/",
+              "https://www.instagram.com/jahidshahwp/",
+              "https://www.youtube.com/@JahidShahWP",
+              "https://www.pinterest.com/jahidshahwp/",
+              "https://businessbridgehub.com/"
+            ]
+          },
+          {
+            "@type": "TechArticle",
+            "@id": "https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html/#article",
+            "isPartOf": {
+              "@id": "https://labs.jahidshah.com/#website"
+            },
+            "headline": "How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide",
+            "description": "A comprehensive guide covering installation, configuration, signature updates, directory scans, quarantine handling, and automation with ClamAV on Linux.",
+            "author": {
+              "@id": "https://jahidshah.com/#person"
+            },
+            "publisher": {
+              "@id": "https://jahidshah.com/#person"
+            },
+            "mainEntityOfPage": "https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html",
+            "articleSection": "Web Security & Linux Administration",
+            "inLanguage": "en-US"
+          }
         ]
-      },
-      {
-        "@type": "TechArticle",
-        "@id": "https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html/#article",
-        "isPartOf": {
-          "@id": "https://labs.jahidshah.com/#website"
-        },
-        "headline": "How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide",
-        "description": "A comprehensive guide covering installation, configuration, signature updates, directory scans, quarantine handling, and automation with ClamAV on Linux.",
-        "author": {
-          "@id": "https://jahidshah.com/#person"
-        },
-        "publisher": {
-          "@id": "https://jahidshah.com/#person"
-        },
-        "mainEntityOfPage": "https://labs.jahidshah.com/Best-Kali-Linux-tools/clamav-installation-usage-guide.html",
-        "articleSection": "Web Security & Linux Administration",
-        "inLanguage": "en-US"
       }
-    ]
-  }
-  </script>
-  <style>
-    body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.68; color: #1f2937; max-width: 860px; margin: 0 auto; padding: 24px; }
-    h1 { font-size: 2.2rem; color: #111827; margin-bottom: 0.5rem; }
-    h2 { font-size: 1.5rem; color: #1f2937; margin-top: 2rem; border-bottom: 2px solid #f3f4f6; padding-bottom: 0.3rem; }
-    h3 { font-size: 1.2rem; color: #374151; margin-top: 1.2rem; }
-    code { background: #f3f4f6; color: #b91c1c; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
-    pre { background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 0.92rem; }
-    pre code { background: none; color: inherit; padding: 0; }
-    table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
-    th, td { border: 1px solid #e5e7eb; padding: 10px 14px; text-align: left; }
-    th { background: #f9fafb; font-weight: 600; }
-    blockquote { border-left: 4px solid #2563eb; margin: 18px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; border-radius: 0 6px 6px 0; }
-    .author-box { border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 40px; }
-    /* Base structural rules for all buttons */
-    .btn {
-      display: inline-block;
-      font-weight: 400;
-      text-align: center;
-      vertical-align: middle;
-      cursor: pointer;
-      user-select: none;
-      background-color: transparent;
-      border: 1px solid transparent;
-      padding: 0.375rem 0.75rem;
-      font-size: 1rem;
-      line-height: 1.5;
-      border-radius: 0.25rem;
-      text-decoration: none;
-      transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-    }
-    
-    /* Hover state defaults for structural safety */
-    .btn:hover {
-      text-decoration: none;
-    }
-    
-    /* Color theme modifications for the primary button */
-    .btn-primary {
-      color: #fff;
-      background-color: #007bff;
-      border-color: #007bff;
-    }
-    
-    /* Hover and active color transitions */
-    .btn-primary:hover {
-      color: #fff;
-      background-color: #0069d9;
-      border-color: #0062cc;
-    }
-    
-    .btn-primary:focus {
-      color: #fff;
-      background-color: #0069d9;
-      border-color: #0062cc;
-      box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
-    }
-  </style>
-</head>
-<body>
+      </script>
+      <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif; line-height: 1.68; color: #1f2937;}
+        h1 { font-size: 2.2rem; color: #111827; margin-bottom: 0.5rem; }
+        h2 { font-size: 1.5rem; color: #1f2937; margin-top: 2rem; border-bottom: 2px solid #f3f4f6; padding-bottom: 0.3rem; }
+        h3 { font-size: 1.2rem; color: #374151; margin-top: 1.2rem; }
+        code { background: #f3f4f6; color: #b91c1c; padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+        pre { background: #111827; color: #f9fafb; padding: 16px; border-radius: 8px; overflow-x: auto; font-size: 0.92rem; }
+        pre code { background: none; color: inherit; padding: 0; }
+        table { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.95rem; }
+        th, td { border: 1px solid #e5e7eb; padding: 10px 14px; text-align: left; }
+        th { background: #f9fafb; font-weight: 600; }
+        blockquote { border-left: 4px solid #2563eb; margin: 18px 0; padding: 10px 18px; background: #eff6ff; color: #1e40af; border-radius: 0 6px 6px 0; }
+        .author-box { border-top: 1px solid #e5e7eb; padding-top: 20px; margin-top: 40px; }
+        /* Base structural rules for all buttons */
+        .btn {
+          display: inline-block;
+          font-weight: 400;
+          text-align: center;
+          vertical-align: middle;
+          cursor: pointer;
+          user-select: none;
+          background-color: transparent;
+          border: 1px solid transparent;
+          padding: 0.375rem 0.75rem;
+          font-size: 1rem;
+          line-height: 1.5;
+          border-radius: 0.25rem;
+          text-decoration: none;
+          transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        }
+        
+        /* Hover state defaults for structural safety */
+        .btn:hover {
+          text-decoration: none;
+        }
+        
+        /* Color theme modifications for the primary button */
+        .btn-primary {
+          color: #fff;
+          background-color: #007bff;
+          border-color: #007bff;
+        }
+        
+        /* Hover and active color transitions */
+        .btn-primary:hover {
+          color: #fff;
+          background-color: #0069d9;
+          border-color: #0062cc;
+        }
+        
+        .btn-primary:focus {
+          color: #fff;
+          background-color: #0069d9;
+          border-color: #0062cc;
+          box-shadow: 0 0 0 0.2rem rgba(38, 143, 255, 0.5);
+        }
+      </style>
+    </head>
+    <body>
+	    	<!-- Navbar Section Start-->
+        <div class="labs-navbar sticky-top" id="navbar-container"></div>
+        <!-- Navbar Section End-->
+		
+		    <div class="container wrap pt-2">
+          <div class="row">
+            <article class="col-sm-8 single-post">
+              <div class="post-body">
+                <figure>
+                  <img src="https://labs.jahidshah.com/Images/clamav-installation-usage-guide.png" alt="ClamAV">
+                  <figcaption style="text-align: center;">ClamAV: A powerful open-source antivirus solution for Linux systems.</figcaption>
+                </figure>
+                    <section>
+                      <h1>How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide</h1>
+                      <p><em>Published by <a href="https://jahidshah.com/">Jahid Shah</a> | Technical Security &amp; Linux Administration Guide</em></p>
+                    </section>
 
-  <header>
-    <h1>How to Install and Use ClamAV on Linux: Complete Step-by-Step Guide</h1>
-    <p><em>Published by <a href="https://jahidshah.com/">Jahid Shah</a> | Technical Security &amp; Linux Administration Guide</em></p>
-  </header>
+                    <main>
+                      <p>ClamAV (Clam AntiVirus) is the industry standard, open-source antivirus toolkit designed for detecting trojans, viruses, webshells, and malicious payloads on Linux servers, web roots, and mail gateways. This practical guide covers installation, virus database management, file scanning, and production automation.</p>
 
-  <main>
-    <p>ClamAV (Clam AntiVirus) is the industry standard, open-source antivirus toolkit designed for detecting trojans, viruses, webshells, and malicious payloads on Linux servers, web roots, and mail gateways. This practical guide covers installation, virus database management, file scanning, and production automation.</p>
+                      <h2>1. Understanding Core ClamAV Components</h2>
+                      <p>ClamAV consists of three primary modules:</p>
+                      <ul>
+                        <li><strong>clamscan:</strong> A standalone, on-demand command-line scanning engine.</li>
+                        <li><strong>freshclam:</strong> The automatic signature database updater.</li>
+                        <li><strong>clamd / clamav-daemon:</strong> A persistent, background scanning daemon that keeps definitions loaded in memory for faster scans via <code>clamdscan</code>.</li>
+                      </ul>
 
-    <h2>1. Understanding Core ClamAV Components</h2>
-    <p>ClamAV consists of three primary modules:</p>
-    <ul>
-      <li><strong>clamscan:</strong> A standalone, on-demand command-line scanning engine.</li>
-      <li><strong>freshclam:</strong> The automatic signature database updater.</li>
-      <li><strong>clamd / clamav-daemon:</strong> A persistent, background scanning daemon that keeps definitions loaded in memory for faster scans via <code>clamdscan</code>.</li>
-    </ul>
+                      <h2>2. Installing ClamAV</h2>
+                      
+                      <h3>Ubuntu / Debian</h3>
+<pre>
+<code>
+sudo apt update
+sudo apt install clamav clamav-daemon -y
+</code>
+</pre>
 
-    <h2>2. Installing ClamAV</h2>
-    
-    <h3>Ubuntu / Debian</h3>
-    <pre><code>sudo apt update
-sudo apt install clamav clamav-daemon -y</code></pre>
-
-    <h3>RHEL / AlmaLinux / Rocky Linux / CentOS</h3>
-    <pre><code>sudo dnf install epel-release -y
+                      <h3>RHEL / AlmaLinux / Rocky Linux / CentOS</h3>
+<pre><code>sudo dnf install epel-release -y
 sudo dnf install clamav clamd clamav-update -y</code></pre>
 
-    <h2>3. Updating Virus Signatures (freshclam)</h2>
-    <p>Before scanning any files, synchronize the latest signature database. The <code>freshclam</code> service frequently runs in the background immediately upon installation; stop it momentarily to execute an initial manual sync:</p>
-    <pre><code># Stop the daemon temporarily to release the lock file
+                      <h2>3. Updating Virus Signatures (freshclam)</h2>
+                      <p>Before scanning any files, synchronize the latest signature database. The <code>freshclam</code> service frequently runs in the background immediately upon installation; stop it momentarily to execute an initial manual sync:</p>
+<pre><code># Stop the daemon temporarily to release the lock file
 sudo systemctl stop clamav-freshclam
 
 # Update definitions manually
@@ -179,103 +201,173 @@ sudo freshclam
 sudo systemctl start clamav-freshclam
 sudo systemctl enable clamav-freshclam</code></pre>
 
-    <h2>4. Practical Scanning Commands (clamscan)</h2>
+                      <h2>4. Practical Scanning Commands (clamscan)</h2>
 
-    <h3>Basic Syntax and Daily Commands</h3>
-    <table>
-      <thead>
-        <tr>
-          <th>Task</th>
-          <th>Command</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Scan a single file</td>
-          <td><code>clamscan /path/to/file.php</code></td>
-        </tr>
-        <tr>
-          <td>Scan directory recursively, showing infected files only</td>
-          <td><code>clamscan -r -i /var/www/html</code></td>
-        </tr>
-        <tr>
-          <td>Scan entire system, excluding pseudo-filesystems</td>
-          <td><code>sudo clamscan -r -i --exclude-dir="^/sys" --exclude-dir="^/proc" --exclude-dir="^/dev" /</code></td>
-        </tr>
-        <tr>
-          <td>Log scan results to an output file</td>
-          <td><code>clamscan -r -i /var/www/html --log=/var/log/clamav/scan.log</code></td>
-        </tr>
-      </tbody>
-    </table>
+                      <h3>Basic Syntax and Daily Commands</h3>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Task</th>
+                            <th>Command</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Scan a single file</td>
+                            <td><code>clamscan /path/to/file.php</code></td>
+                          </tr>
+                          <tr>
+                            <td>Scan directory recursively, showing infected files only</td>
+                            <td><code>clamscan -r -i /var/www/html</code></td>
+                          </tr>
+                          <tr>
+                            <td>Scan entire system, excluding pseudo-filesystems</td>
+                            <td><code>sudo clamscan -r -i --exclude-dir="^/sys" --exclude-dir="^/proc" --exclude-dir="^/dev" /</code></td>
+                          </tr>
+                          <tr>
+                            <td>Log scan results to an output file</td>
+                            <td><code>clamscan -r -i /var/www/html --log=/var/log/clamav/scan.log</code></td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-    <h3>Quarantining vs. Removing Threats</h3>
-    <blockquote>
-      <strong>Safety Rule:</strong> Avoid using <code>--remove=yes</code> blindly on production web servers, as false positives can break applications. Move suspicious files to a dedicated quarantine directory instead.
-    </blockquote>
-    <pre><code># Create a dedicated quarantine directory
+                      <h3>Quarantining vs. Removing Threats</h3>
+                      <blockquote>
+                        <strong>Safety Rule:</strong> Avoid using <code>--remove=yes</code> blindly on production web servers, as false positives can break applications. Move suspicious files to a dedicated quarantine directory instead.
+                      </blockquote>
+<pre><code># Create a dedicated quarantine directory
 sudo mkdir -p /var/quarantine
 
 # Run recursive scan and move infected files to quarantine
 sudo clamscan -r -i --move=/var/quarantine /var/www/html</code></pre>
 
-    <h2>5. Performance Optimization: clamscan vs clamdscan</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Feature</th>
-          <th>clamscan</th>
-          <th>clamdscan</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>Daemon Required</td>
-          <td>No</td>
-          <td>Yes (<code>clamav-daemon</code>)</td>
-        </tr>
-        <tr>
-          <td>Database Loading</td>
-          <td>Reloads definitions on every execution</td>
-          <td>Kept continuously in system memory</td>
-        </tr>
-        <tr>
-          <td>Scan Startup Speed</td>
-          <td>Slower (loads 300MB+ database)</td>
-          <td>Near instantaneous execution</td>
-        </tr>
-        <tr>
-          <td>Ideal Use Case</td>
-          <td>One-off manual checks</td>
-          <td>Automated cron jobs &amp; active servers</td>
-        </tr>
-      </tbody>
-    </table>
+                      <h2>5. Performance Optimization: clamscan vs clamdscan</h2>
+                      <table>
+                        <thead>
+                          <tr>
+                            <th>Feature</th>
+                            <th>clamscan</th>
+                            <th>clamdscan</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>Daemon Required</td>
+                            <td>No</td>
+                            <td>Yes (<code>clamav-daemon</code>)</td>
+                          </tr>
+                          <tr>
+                            <td>Database Loading</td>
+                            <td>Reloads definitions on every execution</td>
+                            <td>Kept continuously in system memory</td>
+                          </tr>
+                          <tr>
+                            <td>Scan Startup Speed</td>
+                            <td>Slower (loads 300MB+ database)</td>
+                            <td>Near instantaneous execution</td>
+                          </tr>
+                          <tr>
+                            <td>Ideal Use Case</td>
+                            <td>One-off manual checks</td>
+                            <td>Automated cron jobs &amp; active servers</td>
+                          </tr>
+                        </tbody>
+                      </table>
 
-    <p>To use <code>clamdscan</code>, ensure the daemon is running:</p>
-    <pre><code>sudo systemctl enable --now clamav-daemon
+                      <p>To use <code>clamdscan</code>, ensure the daemon is running:</p>
+<pre><code>sudo systemctl enable --now clamav-daemon
 clamdscan -m --fdpass /var/www/html</code></pre>
 
-    <h2>6. Automating Scans with Cron</h2>
-    <p>Automate daily security scans by adding a cron job to root's crontab:</p>
-    <pre><code>sudo crontab -e</code></pre>
-    <p>Add the following line to schedule a daily scan of the web root at 03:00 AM, logging results to <code>/var/log/clamav/daily-scan.log</code>:</p>
-    <pre><code>0 3 * * * /usr/bin/clamscan -r -i /var/www/html --log=/var/log/clamav/daily-scan.log --move=/var/quarantine</code></pre>
+                      <h2>6. Automating Scans with Cron</h2>
+                      <p>Automate daily security scans by adding a cron job to root's crontab:</p>
+                      <pre><code>sudo crontab -e</code></pre>
+                      <p>Add the following line to schedule a daily scan of the web root at 03:00 AM, logging results to <code>/var/log/clamav/daily-scan.log</code>:</p>
+                      <pre><code>0 3 * * * /usr/bin/clamscan -r -i /var/www/html --log=/var/log/clamav/daily-scan.log --move=/var/quarantine</code></pre>
 
-    <h2>7. Testing the Configuration</h2>
-    <p>Validate that ClamAV triggers alerts properly using the standard harmless EICAR test string:</p>
-    <pre><code># Download the harmless EICAR test signature
+                      <h2>7. Testing the Configuration</h2>
+                      <p>Validate that ClamAV triggers alerts properly using the standard harmless EICAR test string:</p>
+<pre><code># Download the harmless EICAR test signature
 curl -s -O https://secure.eicar.org/eicar.com.txt
 
 # Run the scanner
 clamscan -i eicar.com.txt</code></pre>
-    <p>If ClamAV displays <code>eicar.com.txt: Win.Test.EICAR_HDB-1 FOUND</code>, the scanner and detection database are functioning properly.</p>
-  </main>
+                      <p>If ClamAV displays <code>eicar.com.txt: Win.Test.EICAR_HDB-1 FOUND</code>, the scanner and detection database are functioning properly.</p>
+                    </main>
 
-  <footer class="author-box">
-    <p><strong>About the Author:</strong> <a href="https://jahidshah.com/">Jahid Shah</a> is a WordPress developer and security specialist focusing on malware remediation, API hardening, and server infrastructure at <a href="https://labs.jahidshah.com/">Jahid Shah Labs</a>.</p>
-    <span class="btn btn-primary"><a href="https://labs.jahidshah.com/Best-Kali-Linux-tools/">Back to Home</a></span>
-  </footer>
+              </div>
+              <div id="relatedpost-container-page" class="related-posts">
+                
+              </div>
 
-</body>
+            </article>
+            <aside id="sidebar-container-page" class="bd-sidebar col-sm-4 text-center"></aside>
+          </div>
+        </div>
+
+			<!-- Footer Section-->
+      <footer class="footer" id="footer-container">
+      </footer>
+      <!-- End of Footer Section -->
+        <script>
+            // Function to load navbar and footer
+            document.addEventListener("DOMContentLoaded", function () {
+                fetch("navbar.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("navbar-container").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading the navbar:", error));
+                
+                fetch("page-navbar.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("navbar-container-page").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading the navbar:", error));
+                
+                fetch("related-post.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("relatedpost-container-page").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading the navbar:", error));
+
+                
+                fetch("sidebar.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("sidebar-container-page").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading the navbar:", error));
+
+                fetch("footer.html")
+                    .then(response => response.text())
+                    .then(data => {
+                        document.getElementById("footer-container").innerHTML = data;
+                    })
+                    .catch(error => console.error("Error loading the footer:", error));
+            });
+        </script>
+        
+        <!-- Scroll to Top Button -->
+        <button onclick="topFunction()" id="scrollToTopBtn" title="Go to top">Top</button>
+        
+        <!-- Chatbot Button -->
+        <button id="chatbotBtn" style="display:none;" onclick="openChatbot()">💬</button>
+
+        <!-- JavaScript -->
+        <script src="myscripts.js"></script>
+
+        <!-- Bootstrap JS -->
+        <script
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js">
+        </script>
+
+        <!-- Current Year -->
+        <script>
+            document.getElementById("year").textContent =
+                new Date().getFullYear();
+        </script>
+
+  </body>
 </html>
